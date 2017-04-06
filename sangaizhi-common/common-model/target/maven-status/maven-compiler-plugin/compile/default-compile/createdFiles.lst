@@ -1,0 +1,14 @@
+org\sangaizhi\resume\common\qo\WorksCategoryQO.class
+org\sangaizhi\resume\common\vo\WorksVO.class
+org\sangaizhi\resume\common\qo\PersonQO.class
+org\sangaizhi\resume\common\qo\UserQO.class
+org\sangaizhi\resume\common\vo\WorksCategoryVO.class
+org\sangaizhi\resume\common\vo\SkillVO.class
+org\sangaizhi\resume\common\qo\SkillQO.class
+org\sangaizhi\resume\common\vo\ProjectVO.class
+org\sangaizhi\resume\common\qo\ProjectQO.class
+org\sangaizhi\resume\common\vo\UserVO.class
+org\sangaizhi\resume\common\vo\ExperienceVO.class
+org\sangaizhi\resume\common\qo\ExperienceQO.class
+org\sangaizhi\resume\common\qo\WorksQO.class
+org\sangaizhi\resume\common\vo\PersonVO.class

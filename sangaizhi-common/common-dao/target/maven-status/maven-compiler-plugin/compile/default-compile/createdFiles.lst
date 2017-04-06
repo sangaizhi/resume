@@ -1,0 +1,7 @@
+org\sangaizhi\resume\common\dao\ProjectDao.class
+org\sangaizhi\resume\common\dao\PersonDao.class
+org\sangaizhi\resume\common\dao\WorksCategoryDao.class
+org\sangaizhi\resume\common\dao\WorksDao.class
+org\sangaizhi\resume\common\dao\ExperienceDao.class
+org\sangaizhi\resume\common\dao\UserDao.class
+org\sangaizhi\resume\common\dao\SkillDao.class

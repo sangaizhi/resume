@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.sangaizhi.resume.common.dao.PersonDao">
+
+    <resultMap id="PersonMap" type="org.sangaizhi.resume.common.vo.PersonVO">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="nickName" column="nickName"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="address" column="address"/>
+        <result property="nativeAddr" column="nativeAddr"/>
+        <result property="sex" column="sex"/>
+        <result property="headImg" column="headImg"/>
+        <result property="image1" column="image1"/>
+        <result property="image2" column="image2"/>
+        <result property="image3" column="image3"/>
+        <result property="webSite" column="webSite"/>
+        <result property="weiboAddr" column="weiboAddr"/>
+        <result property="blogAddr" column="blogAddr"/>
+        <result property="createTime" column="createTime"/>
+        <result property="updateTime" column="updateTime"/>
+    </resultMap>
+    
+    <sql id="columns">
+        <![CDATA[
+        	id as id,
+        	name as name,
+        	nick_name as nickName,
+        	phone as phone,
+        	email as email,
+        	address as address,
+        	native_addr as nativeAddr,
+        	sex as sex,
+        	head_img as headImg,
+        	image_1 as image1,
+        	image_2 as image2,
+        	image_3 as image3,
+        	web_site as webSite,
+        	weibo_addr as weiboAddr,
+        	blog_addr as blogAddr,
+        	create_time as createTime,
+        	update_time as updateTime
+        ]]>
+    </sql>
+    
+    <sql id="where">
+    	<where>
+           	<if test="@Ognl@isNotEmpty(id)">
+            	<![CDATA[ AND id = #{id} ]]>
+            </if>
+           	<if test="@Ognl@isNotEmpty(name)">
+            	<![CDATA[ AND name = #{name} ]]>
+            </if>
+           	<if test="@Ognl@isNotEmpty(nickName)">
+            	<![CDATA[ AND nick_name = #{nickName} ]]>
+            </if>
+           	<if test="@Ognl@isNotEmpty(phone)">
+            	<![CDATA[ AND phone = #{phone} ]]>
+            </if>
+           	<if test="@Ognl@isNotEmpty(email)">
+            	<![CDATA[ AND email = #{email} ]]>
+            </if>
+           	<if test="@Ognl@isNotEmpty(address)">
+            	<![CDATA[ AND address = #{address} ]]>
+            </if>
+           	<if test="@Ognl@isNotEmpty(nativeAddr)">
+            	<![CDATA[ AND native_addr = #{nativeAddr} ]]>
+            </if>
+           	<if test="@Ognl@isNotEmpty(sex)">
+            	<![CDATA[ AND sex = #{sex} ]]>
+            </if>
+           	<if test="@Ognl@isNotEmpty(headImg)">
+            	<![CDATA[ AND head_img = #{headImg} ]]>
+            </if>
+           	<if test="@Ognl@isNotEmpty(image1)">
+            	<![CDATA[ AND image_1 = #{image1} ]]>
+            </if>
+           	<if test="@Ognl@isNotEmpty(image2)">
+            	<![CDATA[ AND image_2 = #{image2} ]]>
+            </if>
+           	<if test="@Ognl@isNotEmpty(image3)">
+            	<![CDATA[ AND image_3 = #{image3} ]]>
+            </if>
+           	<if test="@Ognl@isNotEmpty(webSite)">
+            	<![CDATA[ AND web_site = #{webSite} ]]>
+            </if>
+           	<if test="@Ognl@isNotEmpty(weiboAddr)">
+            	<![CDATA[ AND weibo_addr = #{weiboAddr} ]]>
+            </if>
+           	<if test="@Ognl@isNotEmpty(blogAddr)">
+            	<![CDATA[ AND blog_addr = #{blogAddr} ]]>
+            </if>
+           	<if test="@Ognl@isNotEmpty(createTime)">
+           		<![CDATA[ AND create_time = #{createTime} ]]>
+           	</if>
+           	<if test="@Ognl@isNotEmpty(createTimeBegin)">
+           		<![CDATA[ AND create_time >= #{createTimeBegin} ]]>
+           	</if>
+           	<if test="@Ognl@isNotEmpty(createTimeEnd)">
+            	<![CDATA[ AND create_time <= #{createTimeEnd} ]]>
+           	</if>
+           	<if test="@Ognl@isNotEmpty(updateTime)">
+           		<![CDATA[ AND update_time = #{updateTime} ]]>
+           	</if>
+           	<if test="@Ognl@isNotEmpty(updateTimeBegin)">
+           		<![CDATA[ AND update_time >= #{updateTimeBegin} ]]>
+           	</if>
+           	<if test="@Ognl@isNotEmpty(updateTimeEnd)">
+            	<![CDATA[ AND update_time <= #{updateTimeEnd} ]]>
+           	</if>
+        </where>
+    </sql>
+    
+    <select id="getById" resultType="org.sangaizhi.resume.common.vo.PersonVO">
+        SELECT 
+        	<include refid="columns" />
+        FROM
+            t_person
+        <where> 
+            id = #{id} 
+        </where>
+    </select>
+    
+    <select id="getByCondition" resultType="org.sangaizhi.resume.common.vo.PersonVO">
+        SELECT
+            <include refid="columns" />
+        FROM
+            t_person 
+        <include refid="where"/>
+    </select>
+    
+    <select id="queryList" resultMap="PersonMap">
+        SELECT
+            <include refid="columns" />
+        FROM
+            t_person 
+        <include refid="where"/>
+    </select>
+        
+    <select id="count" resultType="long">
+	    SELECT
+	        count(1)
+	    FROM
+	        t_person
+        <include refid="where"/>
+    </select>
+    
+    <select id="queryPage" resultMap="PersonMap">
+        SELECT
+            <include refid="columns" />
+        FROM
+            t_person 
+        <include refid="where"/>
+	    <!-- {startPosition}和{pageSize}前面加上"#"号 --> 
+        LIMIT {startPosition},{pageSize}
+    </select>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+	    INSERT INTO t_person (
+	        name,
+	        nick_name,
+	        phone,
+	        email,
+	        address,
+	        native_addr,
+	        sex,
+	        head_img,
+	        image_1,
+	        image_2,
+	        image_3,
+	        web_site,
+	        weibo_addr,
+	        blog_addr,
+	        create_time,
+	        update_time
+	    ) VALUES (
+	        #{name},
+	        #{nickName},
+	        #{phone},
+	        #{email},
+	        #{address},
+	        #{nativeAddr},
+	        #{sex},
+	        #{headImg},
+	        #{image1},
+	        #{image2},
+	        #{image3},
+	        #{webSite},
+	        #{weiboAddr},
+	        #{blogAddr},
+	        #{createTime},
+	        #{updateTime}
+	    )
+    </insert>
+
+    <insert id="saveBatch">
+        INSERT INTO t_person (
+            name,
+            nick_name,
+            phone,
+            email,
+            address,
+            native_addr,
+            sex,
+            head_img,
+            image_1,
+            image_2,
+            image_3,
+            web_site,
+            weibo_addr,
+            blog_addr,
+            create_time,
+            update_time
+        ) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+                                #{item.name},
+                #{item.nickName},
+                #{item.phone},
+                #{item.email},
+                #{item.address},
+                #{item.nativeAddr},
+                #{item.sex},
+                #{item.headImg},
+                #{item.image1},
+                #{item.image2},
+                #{item.image3},
+                #{item.webSite},
+                #{item.weiboAddr},
+                #{item.blogAddr},
+                #{item.createTime},
+                #{item.updateTime}
+            )
+        </foreach>
+    </insert>
+    
+    <update id="updateById">
+    	UPDATE
+        	t_person
+    	<set>
+        	<if test="name != null">
+        		<![CDATA[ name = #{name} ]]>,
+        	</if>
+        	<if test="nickName != null">
+        		<![CDATA[ nick_name = #{nickName} ]]>,
+        	</if>
+        	<if test="phone != null">
+        		<![CDATA[ phone = #{phone} ]]>,
+        	</if>
+        	<if test="email != null">
+        		<![CDATA[ email = #{email} ]]>,
+        	</if>
+        	<if test="address != null">
+        		<![CDATA[ address = #{address} ]]>,
+        	</if>
+        	<if test="nativeAddr != null">
+        		<![CDATA[ native_addr = #{nativeAddr} ]]>,
+        	</if>
+        	<if test="sex != null">
+        		<![CDATA[ sex = #{sex} ]]>,
+        	</if>
+        	<if test="headImg != null">
+        		<![CDATA[ head_img = #{headImg} ]]>,
+        	</if>
+        	<if test="image1 != null">
+        		<![CDATA[ image_1 = #{image1} ]]>,
+        	</if>
+        	<if test="image2 != null">
+        		<![CDATA[ image_2 = #{image2} ]]>,
+        	</if>
+        	<if test="image3 != null">
+        		<![CDATA[ image_3 = #{image3} ]]>,
+        	</if>
+        	<if test="webSite != null">
+        		<![CDATA[ web_site = #{webSite} ]]>,
+        	</if>
+        	<if test="weiboAddr != null">
+        		<![CDATA[ weibo_addr = #{weiboAddr} ]]>,
+        	</if>
+        	<if test="blogAddr != null">
+        		<![CDATA[ blog_addr = #{blogAddr} ]]>,
+        	</if>
+        	<if test="createTime != null">
+        		<![CDATA[ create_time = #{createTime} ]]>,
+        	</if>
+        	<if test="updateTime != null">
+        		<![CDATA[ update_time = #{updateTime} ]]>
+        	</if>
+    	</set>
+    	<where>
+        	id = #{id}
+    	</where>
+    </update>
+    
+    <delete id="deleteById">
+	    DELETE
+	    FROM
+	        t_person
+	    <where>
+	        id = #{id} 
+	    </where>
+    </delete>
+    
+    <delete id="deleteBatchByIds">
+        DELETE
+        FROM
+            t_person
+        WHERE
+            id IN
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+#{item}        </foreach>
+    </delete>
+    
+   	<select id="getDetailById" resultType="org.sangaizhi.resume.common.vo.PersonVO">
+        SELECT 
+        	<include refid="columns" />
+        FROM
+            t_person
+        <where> 
+            id = #{id} 
+        </where>
+    </select>
+    
+    <select id="getDetailByCondition" resultType="org.sangaizhi.resume.common.vo.PersonVO">
+        SELECT
+            <include refid="columns" />
+        FROM
+            t_person 
+        <include refid="where"/>
+    </select>
+    
+    <select id="queryDetailList" resultMap="PersonMap">
+        SELECT
+            <include refid="columns" />
+        FROM
+            t_person 
+        <include refid="where"/>
+    </select>
+        
+    <select id="countDetail" resultType="long">
+	    SELECT
+	        count(1)
+	    FROM
+	        t_person
+        <include refid="where"/>
+    </select>
+    
+    <select id="queryDetailPage" resultMap="PersonMap">
+        SELECT
+            <include refid="columns" />
+        FROM
+            t_person 
+        <include refid="where"/>
+	    <!-- {startPosition}和{pageSize}前面加上"#"号 --> 
+        LIMIT {startPosition},{pageSize}
+    </select>
+</mapper>
+

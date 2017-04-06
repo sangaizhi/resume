@@ -1,0 +1,14 @@
+org\sangaizhi\resume\common\service\impl\WorksCategoryServiceImpl.class
+org\sangaizhi\resume\common\service\SkillService.class
+org\sangaizhi\resume\common\service\ExperienceService.class
+org\sangaizhi\resume\common\service\ProjectService.class
+org\sangaizhi\resume\common\service\UserService.class
+org\sangaizhi\resume\common\service\impl\PersonServiceImpl.class
+org\sangaizhi\resume\common\service\impl\SkillServiceImpl.class
+org\sangaizhi\resume\common\service\WorksService.class
+org\sangaizhi\resume\common\service\impl\UserServiceImpl.class
+org\sangaizhi\resume\common\service\PersonService.class
+org\sangaizhi\resume\common\service\impl\ProjectServiceImpl.class
+org\sangaizhi\resume\common\service\WorksCategoryService.class
+org\sangaizhi\resume\common\service\impl\ExperienceServiceImpl.class
+org\sangaizhi\resume\common\service\impl\WorksServiceImpl.class

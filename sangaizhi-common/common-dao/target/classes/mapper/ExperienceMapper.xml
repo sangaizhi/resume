@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.sangaizhi.resume.common.dao.ExperienceDao">
+
+    <resultMap id="ExperienceMap" type="org.sangaizhi.resume.common.vo.ExperienceVO">
+        <result property="id" column="id"/>
+        <result property="startTime" column="startTime"/>
+        <result property="endTime" column="endTime"/>
+        <result property="company" column="company"/>
+        <result property="position" column="position"/>
+        <result property="description" column="description"/>
+        <result property="personId" column="personId"/>
+        <result property="createTime" column="createTime"/>
+        <result property="updateTime" column="updateTime"/>
+    </resultMap>
+    
+    <sql id="columns">
+        <![CDATA[
+        	id as id,
+        	start_time as startTime,
+        	end_time as endTime,
+        	company as company,
+        	position as position,
+        	description as description,
+        	person_id as personId,
+        	create_time as createTime,
+        	update_time as updateTime
+        ]]>
+    </sql>
+    
+    <sql id="where">
+    	<where>
+           	<if test="@Ognl@isNotEmpty(id)">
+            	<![CDATA[ AND id = #{id} ]]>
+            </if>
+           	<if test="@Ognl@isNotEmpty(startTime)">
+           		<![CDATA[ AND start_time = #{startTime} ]]>
+           	</if>
+           	<if test="@Ognl@isNotEmpty(startTimeBegin)">
+           		<![CDATA[ AND start_time >= #{startTimeBegin} ]]>
+           	</if>
+           	<if test="@Ognl@isNotEmpty(startTimeEnd)">
+            	<![CDATA[ AND start_time <= #{startTimeEnd} ]]>
+           	</if>
+           	<if test="@Ognl@isNotEmpty(endTime)">
+            	<![CDATA[ AND end_time = #{endTime} ]]>
+            </if>
+           	<if test="@Ognl@isNotEmpty(company)">
+            	<![CDATA[ AND company = #{company} ]]>
+            </if>
+           	<if test="@Ognl@isNotEmpty(position)">
+            	<![CDATA[ AND position = #{position} ]]>
+            </if>
+           	<if test="@Ognl@isNotEmpty(description)">
+            	<![CDATA[ AND description = #{description} ]]>
+            </if>
+           	<if test="@Ognl@isNotEmpty(personId)">
+            	<![CDATA[ AND person_id = #{personId} ]]>
+            </if>
+           	<if test="@Ognl@isNotEmpty(createTime)">
+           		<![CDATA[ AND create_time = #{createTime} ]]>
+           	</if>
+           	<if test="@Ognl@isNotEmpty(createTimeBegin)">
+           		<![CDATA[ AND create_time >= #{createTimeBegin} ]]>
+           	</if>
+           	<if test="@Ognl@isNotEmpty(createTimeEnd)">
+            	<![CDATA[ AND create_time <= #{createTimeEnd} ]]>
+           	</if>
+           	<if test="@Ognl@isNotEmpty(updateTime)">
+           		<![CDATA[ AND update_time = #{updateTime} ]]>
+           	</if>
+           	<if test="@Ognl@isNotEmpty(updateTimeBegin)">
+           		<![CDATA[ AND update_time >= #{updateTimeBegin} ]]>
+           	</if>
+           	<if test="@Ognl@isNotEmpty(updateTimeEnd)">
+            	<![CDATA[ AND update_time <= #{updateTimeEnd} ]]>
+           	</if>
+        </where>
+    </sql>
+    
+    <select id="getById" resultType="org.sangaizhi.resume.common.vo.ExperienceVO">
+        SELECT 
+        	<include refid="columns" />
+        FROM
+            t_experience
+        <where> 
+            id = #{id} 
+        </where>
+    </select>
+    
+    <select id="getByCondition" resultType="org.sangaizhi.resume.common.vo.ExperienceVO">
+        SELECT
+            <include refid="columns" />
+        FROM
+            t_experience 
+        <include refid="where"/>
+    </select>
+    
+    <select id="queryList" resultMap="ExperienceMap">
+        SELECT
+            <include refid="columns" />
+        FROM
+            t_experience 
+        <include refid="where"/>
+    </select>
+        
+    <select id="count" resultType="long">
+	    SELECT
+	        count(1)
+	    FROM
+	        t_experience
+        <include refid="where"/>
+    </select>
+    
+    <select id="queryPage" resultMap="ExperienceMap">
+        SELECT
+            <include refid="columns" />
+        FROM
+            t_experience 
+        <include refid="where"/>
+	    <!-- {startPosition}和{pageSize}前面加上"#"号 --> 
+        LIMIT {startPosition},{pageSize}
+    </select>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+	    INSERT INTO t_experience (
+	        start_time,
+	        end_time,
+	        company,
+	        position,
+	        description,
+	        person_id,
+	        create_time,
+	        update_time
+	    ) VALUES (
+	        #{startTime},
+	        #{endTime},
+	        #{company},
+	        #{position},
+	        #{description},
+	        #{personId},
+	        #{createTime},
+	        #{updateTime}
+	    )
+    </insert>
+
+    <insert id="saveBatch">
+        INSERT INTO t_experience (
+            start_time,
+            end_time,
+            company,
+            position,
+            description,
+            person_id,
+            create_time,
+            update_time
+        ) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+                                #{item.startTime},
+                #{item.endTime},
+                #{item.company},
+                #{item.position},
+                #{item.description},
+                #{item.personId},
+                #{item.createTime},
+                #{item.updateTime}
+            )
+        </foreach>
+    </insert>
+    
+    <update id="updateById">
+    	UPDATE
+        	t_experience
+    	<set>
+        	<if test="startTime != null">
+        		<![CDATA[ start_time = #{startTime} ]]>,
+        	</if>
+        	<if test="endTime != null">
+        		<![CDATA[ end_time = #{endTime} ]]>,
+        	</if>
+        	<if test="company != null">
+        		<![CDATA[ company = #{company} ]]>,
+        	</if>
+        	<if test="position != null">
+        		<![CDATA[ position = #{position} ]]>,
+        	</if>
+        	<if test="description != null">
+        		<![CDATA[ description = #{description} ]]>,
+        	</if>
+        	<if test="personId != null">
+        		<![CDATA[ person_id = #{personId} ]]>,
+        	</if>
+        	<if test="createTime != null">
+        		<![CDATA[ create_time = #{createTime} ]]>,
+        	</if>
+        	<if test="updateTime != null">
+        		<![CDATA[ update_time = #{updateTime} ]]>
+        	</if>
+    	</set>
+    	<where>
+        	id = #{id}
+    	</where>
+    </update>
+    
+    <delete id="deleteById">
+	    DELETE
+	    FROM
+	        t_experience
+	    <where>
+	        id = #{id} 
+	    </where>
+    </delete>
+    
+    <delete id="deleteBatchByIds">
+        DELETE
+        FROM
+            t_experience
+        WHERE
+            id IN
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+#{item}        </foreach>
+    </delete>
+    
+   	<select id="getDetailById" resultType="org.sangaizhi.resume.common.vo.ExperienceVO">
+        SELECT 
+        	<include refid="columns" />
+        FROM
+            t_experience
+        <where> 
+            id = #{id} 
+        </where>
+    </select>
+    
+    <select id="getDetailByCondition" resultType="org.sangaizhi.resume.common.vo.ExperienceVO">
+        SELECT
+            <include refid="columns" />
+        FROM
+            t_experience 
+        <include refid="where"/>
+    </select>
+    
+    <select id="queryDetailList" resultMap="ExperienceMap">
+        SELECT
+            <include refid="columns" />
+        FROM
+            t_experience 
+        <include refid="where"/>
+    </select>
+        
+    <select id="countDetail" resultType="long">
+	    SELECT
+	        count(1)
+	    FROM
+	        t_experience
+        <include refid="where"/>
+    </select>
+    
+    <select id="queryDetailPage" resultMap="ExperienceMap">
+        SELECT
+            <include refid="columns" />
+        FROM
+            t_experience 
+        <include refid="where"/>
+	    <!-- {startPosition}和{pageSize}前面加上"#"号 --> 
+        LIMIT {startPosition},{pageSize}
+    </select>
+</mapper>
+
