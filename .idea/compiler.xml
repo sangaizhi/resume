@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="common-dao" />
+        <module name="common-model" />
+        <module name="common-service" />
+        <module name="commons" />
+        <module name="sangaizhi-boss" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="common-dao" target="1.7" />
+      <module name="common-model" target="1.7" />
+      <module name="common-service" target="1.7" />
+      <module name="commons" target="1.7" />
+      <module name="sangaizhi" target="1.5" />
+      <module name="sangaizhi-boss" target="1.7" />
+      <module name="sangaizhi-common" target="1.7" />
+      <module name="sangaizhi-parent" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

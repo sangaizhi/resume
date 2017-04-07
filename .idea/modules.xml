@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/sangaizhi-common/common-dao/common-dao.iml" filepath="$PROJECT_DIR$/sangaizhi-common/common-dao/common-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sangaizhi-common/common-model/common-model.iml" filepath="$PROJECT_DIR$/sangaizhi-common/common-model/common-model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sangaizhi-common/common-service/common-service.iml" filepath="$PROJECT_DIR$/sangaizhi-common/common-service/common-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sangaizhi-common/commons/commons.iml" filepath="$PROJECT_DIR$/sangaizhi-common/commons/commons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sangaizhi.iml" filepath="$PROJECT_DIR$/sangaizhi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sangaizhi-boss/sangaizhi-boss.iml" filepath="$PROJECT_DIR$/sangaizhi-boss/sangaizhi-boss.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sangaizhi-common/sangaizhi-common.iml" filepath="$PROJECT_DIR$/sangaizhi-common/sangaizhi-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sangaizhi-parent/sangaizhi-parent.iml" filepath="$PROJECT_DIR$/sangaizhi-parent/sangaizhi-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sangaizhi-sso/sangaizhi-sso.iml" filepath="$PROJECT_DIR$/sangaizhi-sso/sangaizhi-sso.iml" />
+    </modules>
+  </component>
+</project>
