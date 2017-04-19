@@ -7,6 +7,8 @@ CREATE TABLE  t_user (
   email VARCHAR(100) UNIQUE  COMMENT '邮箱',
   sex SMALLINT  COMMENT '性别',
   head_img VARCHAR(255) COMMENT '头像',
+	password varchar(255) NOT NULL COMMENT '密码',
+	salt varchar(128) NOT NULL COMMENT '密码盐',
   create_time DATETIME COMMENT '创建时间',
   update_time DATETIME COMMENT '更新时间'
 );
@@ -88,7 +90,7 @@ CREATE TABLE t_works (
   cover_img VARCHAR(255) COMMENT '封面图片地址',
   title VARCHAR(100) COMMENT '作品标题',
   person_id BIGINT NOT NULL COMMENT '所属个人',
-  works_category_id NOT NULL COMMENT '分类ID',
+  works_category_id BIGINT NOT NULL COMMENT '分类ID',
   create_time DATETIME COMMENT '创建时间',
   update_time DATETIME COMMENT '更新时间'
 );

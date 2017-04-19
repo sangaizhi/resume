@@ -15,7 +15,6 @@
     }
 
 
-
     // Toggle Left Menu
    jQuery('.menu-list > a').click(function() {
       
@@ -105,22 +104,14 @@
    
 
    searchform_reposition();
-
    jQuery(window).resize(function(){
-
       if(jQuery('body').css('position') == 'relative') {
-
          jQuery('body').removeClass('left-side-collapsed');
-
       } else {
-
          jQuery('body').css({left: '', marginRight: ''});
       }
-
       searchform_reposition();
-
    });
-
    function searchform_reposition() {
       if(jQuery('.searchform').css('position') == 'relative') {
          jQuery('.searchform').insertBefore('.left-side-inner .logged-user');
@@ -148,7 +139,6 @@
         $(this).closest("li").remove();
         return false;
     });
-
     $("#sortable-todo").sortable();
 
 
@@ -156,22 +146,12 @@
     $('.panel .tools .fa-times').click(function () {
         $(this).parents(".panel").parent().remove();
     });
-
-
-
+    
     // tool tips
-
     $('.tooltips').tooltip();
 
     // popovers
-
     $('.popovers').popover();
-
-
-
-
-
-
-
-
+    
+    
 })(jQuery);

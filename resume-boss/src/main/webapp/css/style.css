@@ -17,7 +17,9 @@ body {
     overflow-x: hidden;
     font-size: 14px;
 }
-
+.content-body{
+	background:#fff;
+}
 input, select, textarea {
     font-family: 'Open Sans', sans-serif;
     color: #767676;

@@ -13,6 +13,9 @@
  **/
 package org.sangaizhi.resume.boss.controller;
 
+import java.util.Date;
+import java.util.List;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.sangaizhi.resume.common.qo.UserQO;
@@ -29,9 +32,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.Date;
-import java.util.List;
 
 @Controller
 @RequestMapping("/user")

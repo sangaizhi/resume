@@ -1,11 +1,11 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>左侧导航栏</title>
+<title>å·¦ä¾§å¯¼èªæ </title>
 
 </head>
 <body>
@@ -48,9 +48,9 @@
 			<!--sidebar nav start-->
 			<ul class="nav nav-pills nav-stacked custom-nav">
 				<li class="menu-list nav-active"><a href="index.html"><i
-						class="fa fa-home"></i> <span>Dashboard</span></a>
+						class="fa fa-home"></i> <span>用户管理</span></a>
 					<ul class="sub-menu-list">
-						<li><a href="index_alt.html"> Dashboard 1</a></li>
+						<li><a href="javascript:void(0)" class="nav-href" data-href="../add-user.html">添加用户</a></li>
 						<li class="active"><a href="index.html"> Dashboard 2</a></li>
 					</ul></li>
 

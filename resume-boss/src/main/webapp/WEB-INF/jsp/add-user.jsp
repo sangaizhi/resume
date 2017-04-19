@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -15,17 +14,13 @@
 <link href="css/style.css" rel="stylesheet">
 <link href="css/style-responsive.css" rel="stylesheet">
 </head>
-<body class='sticky-header'>
-	<jsp:include page="navigation.jsp"></jsp:include>
-	<div class="main-content">
-		<jsp:include page="header.jsp"></jsp:include>
+<body class='content-body'>
 		<!-- page heading start-->
 		<div class="page-heading">
-			<h3>Form Validation</h3>
-			<ul class="breadcrumb">
-				<li><a href="#">Form</a></li>
-				<li class="active">Form Validation</li>
-			</ul>
+			<ol class="breadcrumb">
+				<li><a href="#">用户管理</a></li>
+				<li class="active">新增用户</li>
+			</ol>
 		</div>
 		<!-- page heading end-->
 
@@ -67,7 +62,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 </body>
 <!-- Placed js at the end of the document so the pages load faster -->
 <!-- Placed js at the end of the document so the pages load faster -->
@@ -75,7 +69,6 @@
 <script src="js/jquery-ui-1.9.2.custom.min.js"></script>
 <script src="js/jquery-migrate-1.2.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/modernizr.min.js"></script>
 <script src="js/jquery.nicescroll.js"></script>
 <script src="js/layui/lay/dest/layui.all.js"></script>
 <script type="text/javascript" src="js/jquery.validate.min.js"></script>

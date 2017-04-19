@@ -176,13 +176,11 @@
 					<ul class="dropdown-menu dropdown-menu-usermenu pull-right">
 						<li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
 						<li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-						<li><a href="#"><i class="fa fa-sign-out"></i> Log Out</a></li>
+						<li><a href="javascript:void(0)" id="logout"><i class="fa fa-sign-out"></i> Log Out</a></li>
 					</ul></li>
 
 			</ul>
 		</div>
 		<!--notification menu end -->
-
 	</div>
-</body>
 </html>
