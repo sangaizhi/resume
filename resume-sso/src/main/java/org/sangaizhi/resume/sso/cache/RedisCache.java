@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 /**
  * redis 缓存
  */
-@Component
+@Component("redisCache")
 public class RedisCache {
 	
 	

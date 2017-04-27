@@ -40,8 +40,9 @@ public class SSOUserServiceImpl implements SSOUserService
     
     @Value("${PWD_ENCRYPT_ITERATORS}")
     private Integer PWD_ENCRYPT_ITERATORS;
-    
-    private RedisCache redisCache = new RedisCache();
+
+    @Autowired
+    private RedisCache redisCache;
     
     @Autowired
     private UserDao userDao;

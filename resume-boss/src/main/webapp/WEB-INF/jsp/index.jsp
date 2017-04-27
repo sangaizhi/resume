@@ -28,28 +28,29 @@
 	<jsp:include page="navigation.jsp"></jsp:include>
 	<div class="main-content">
 		<jsp:include page="header.jsp"></jsp:include>
-		<iframe src="" id="content-iframe"
-			style="width: 100%; height: 100%; position: fixed; top: 51px; z-index: 99;"></iframe>
+		<iframe src="" id="content-iframe" style="width: 100%; height: 100%; position: fixed; top: 51px; z-index: 99;"></iframe>
 	</div>
 </body>
 <!-- Placed js at the end of the document so the pages load faster -->
 <script src="../js/jquery-1.10.2.min.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script src="../js/jquery.extends.js"></script>
 <script src="../js/jquery-ui-1.9.2.custom.min.js"></script>
 <script src="../js/jquery-migrate-1.2.1.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/jquery.nicescroll.js"></script>
 
-
 <!--common scripts for all pages-->
 <script src="../js/routes.js"></script>
 <script src="../js/scripts.js"></script>
+<script src="../js/resume.js"></script>
 <script src="../js/common-util.js"></script>
 <script>
+
 	function toggleContentFrame(href) {
 		$("#content-iframe").attr("src", href);
 	}
 	$(document).ready(function() {
-		console.log(route);
 		$(".nav-href").click(function(){
 			var href = $(this).data("href");
 			toggleContentFrame(href);
@@ -58,7 +59,7 @@
 			var currentHref = window.top.location.href;
 			var newHref = resumeUrl.addParam(route.system.loginPage, "redirectUrl", currentHref);
 			resumeWindow.redirectTopWindow(newHref);
-			
+
 		});
 	});
 </script>

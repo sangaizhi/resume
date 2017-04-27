@@ -18,69 +18,177 @@
 
 <body class="login-body">
 	<div class="container">
-		<form class="form-signin"
-			action="../user/login.action" method="POST">
+		<form class="form-signin  cmxform form-horizontal adminex-form" id="login-form" action="../user/login.action" method="POST">
 			<div class="form-signin-heading text-center">
-				<h1 class="sign-title">Sign In</h1>
-				<img src="images/login-logo.png" alt="" />
+				<h1 class="sign-title">登录</h1>
+				<img src="../images/login-logo.png" alt="" />
 			</div>
 			<div class="login-wrap">
-				<input type="text" class="form-control" placeholder="User ID"
-					autofocus> <input type="password" class="form-control"
-					placeholder="Password">
-				<button class="btn btn-lg btn-login btn-block" type="submit">
+				<div class="form-group ">
+					<label for="account"
+						class="control-label col-lg-2 col-md-2 col-sm-2 col-xs-2 padl0 padr0 text-r">账号</label>
+					<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+						<input type="text" id="account" name="account" autofocus=""
+							placeholder="用户名/手机号" class="form-control">
+					</div>
+				</div>
+				<div class="form-group ">
+					<label for="password"
+						class="control-label col-lg-2 col-md-2 col-sm-2 col-xs-2 padl0 padr0 text-r">密码</label>
+					<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+						<input type="password" id="password" name="password"
+							placeholder="密码" class="form-control">
+					</div>
+				</div>
+				<button type="button" id="submit"
+					class="btn btn-lg btn-login btn-block" 
+					onclick="login.addSubmit(this)">
 					<i class="fa fa-check"></i>
 				</button>
 				<div class="registration">
-					还没有账号? <a class="" href="../page/register.html"> 去注册
-					</a>
+					还没有账号? <a class="" href="../page/login.html"> 去注册 </a>
 				</div>
 				<label class="checkbox"> <input type="checkbox"
 					value="remember-me"> Remember me <span class="pull-right">
 						<a data-toggle="modal" href="#myModal"> Forgot Password?</a>
-
 				</span>
 				</label>
-
 			</div>
-
-			<!-- Modal -->
-			<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
-				tabindex="-1" id="myModal" class="modal fade">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-hidden="true">&times;</button>
-							<h4 class="modal-title">Forgot Password ?</h4>
-						</div>
-						<div class="modal-body">
-							<p>Enter your e-mail address below to reset your password.</p>
-							<input type="text" name="email" placeholder="Email"
-								autocomplete="off" class="form-control placeholder-no-fix">
-
-						</div>
-						<div class="modal-footer">
-							<button data-dismiss="modal" class="btn btn-default"
-								type="button">Cancel</button>
-							<button class="btn btn-primary" type="button">Submit</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- modal -->
-
 		</form>
-
 	</div>
-
-
 	<!-- Placed js at the end of the document so the pages load faster -->
-
 	<!-- Placed js at the end of the document so the pages load faster -->
-	<script src="js/jquery-1.10.2.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/modernizr.min.js"></script>
+	<script src="../js/jquery-1.10.2.min.js"></script>
+	<script src="../js/jquery-ui-1.9.2.custom.min.js"></script>
+	<script src="../js/jquery-migrate-1.2.1.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/layui/lay/dest/layui.all.js"></script>
+	<script src="../js/jquery.validate.min.js" type="text/javascript"></script>
+	<script src="../js/jquery.validate.extend.js" type="text/javascript"></script>
+	<script src="../js/form.ajax.plugin.js" type="text/javascript"></script>
+	<script src="../js/validate.js" type="text/javascript"></script>
+	<script>
+	var redirectUrl = "${redirectUrl}";
+		var layer = layui.layer;
+		var login = {
+			autoCheck : function() {
+				var account = $.trim($("#account").val());
+				var password = $.trim($("#password").val());
 
+				if (account == '' || account == account || phone == undefined) {
+					return false;
+				}
+				if (!resumeValidate.phone(account)) {
+					return false;
+				}
+				if (password == '' || password == null || password == undefined) {
+					return false;
+				}
+				return true;
+			},
+			checkInputs : function() {
+				var account = $.trim($("#account").val());
+				var password = $.trim($("#password").val());
+				if (account == '' || account == null || account == undefined) {
+					layer.alert("电话不能为空", {
+						icon : 0
+					}, function(index) {
+						layer.close(index);
+					});
+					return false;
+				}
+				if (!resumeValidate.phone(account)) {
+					layer.alert("电话格式错误", {
+						icon : 0
+					}, function(index) {
+						layer.close(index);
+					})
+					return false;
+				}
+				if (password == '' || password == null || password == undefined) {
+					layer.alert("密码不能为空", {
+						icon : 0
+					}, function(index) {
+						layer.close(index);
+					});
+					return false;
+				}
+				return true;
+			},
+			addSubmit : function(submitBtn) {
+				$("#login-form").ajaxSubmit({
+					beforeSend : function() {
+						console.log("beforeSend");
+						$(submitBtn).attr("disabled", "disabled");
+						$(submitBtn).addClass("disabled");
+						return login.checkInputs();
+					},
+					success : function(result) {
+						login.submitSuccess(result);
+					},
+					complete : function() {
+						$(submitBtn).removeAttr("disabled");
+						$(submitBtn).removeClass("disabled")
+					}
+				});
+			},
+			submitSuccess : function(data) {
+				if (data.status) {
+					layer.alert("登录成功", {
+						icon : 1
+					}, function(index) {
+						layer.close(index);
+						if(redirectUrl == ""){
+							location.href = "http://www.baidu.com";
+						}
+						location.href = redirectUrl;
+					})
+				} else {
+					layer.alert(data.msg, {
+						icon : 0
+					}, function(index) {
+						layer.close(index);
+					})
+				}
+			}
+		}
+		$(document).ready(function() {
+			$("#phone").on("change", function() {
+				var isOk = login.autoCheck();
+				if (isOk) {
+					$("#submit").attr("disabled", false);
+				}
+			});
+			$("#password").on("change", function() {
+				var isOk = login.autoCheck();
+				if (isOk) {
+					$("#submit").attr("disabled", false);
+				}
+			});
+			$("#login-form").validate({
+				rules : {
+					phone : {
+						required : true,
+						phone : true
+						
+					},
+					password : {
+						required : true,
+						maxlength : 20
+
+					},
+				},
+				messages : {
+					phone : {
+						required : "电话不能为空",
+					},
+					password : {
+						required : "密码不能为空",
+						maxlength : "密码不能超过20个字符"
+					}
+				}
+			});
+		});
+	</script>
 </body>
 </html>

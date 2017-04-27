@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -68,9 +67,9 @@
 					type="checkbox" value="agree this condition"> <label
 					for="protocol"> 我已阅读并同意<a href="#" class="blue">《resume用户注册协议》</a></label>
 				</label>
-				<button type="submit" id="submit"
+				<button type="button" id="submit"
 					class="btn btn-lg btn-login btn-block" disabled
-					onclick="register.addSubmit()">
+					onclick="register.addSubmit(this)">
 					<i class="fa fa-check"></i>
 				</button>
 
@@ -202,6 +201,7 @@
 					},
 					success : function(result) {
         				console.log(result);
+						debugger;
 						register.submitSuccess(result);
 					},
 					complete : function() {

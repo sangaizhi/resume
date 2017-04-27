@@ -169,9 +169,8 @@
 						</ul>
 					</div></li>
 				<li><a href="#" class="btn btn-default dropdown-toggle"
-					data-toggle="dropdown"> <img
-						src="../images/photos/user-avatar.png" alt="" /> John Doe <span
-						class="caret"></span>
+					data-toggle="dropdown">
+					<img src="../images/photos/user-avatar.png" alt="" /> <span id="username"></span> <span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu dropdown-menu-usermenu pull-right">
 						<li><a href="#"><i class="fa fa-user"></i> Profile</a></li>

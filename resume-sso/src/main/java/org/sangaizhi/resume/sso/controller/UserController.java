@@ -22,8 +22,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.sangaizhi.resume.commons.constant.AccountTypeEnum;
+import org.sangaizhi.resume.commons.constant.Commons;
 import org.sangaizhi.resume.commons.util.CookieUtils;
 import org.sangaizhi.resume.commons.util.ExceptionUtil;
+import org.sangaizhi.resume.commons.util.validate.ValidateUtils;
 import org.sangaizhi.resume.commons.vo.ResumeResult;
 import org.sangaizhi.resume.sso.service.SSOUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,24 +122,37 @@ public class UserController
     
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public ResumeResult login(String username, String password, Short type, HttpServletRequest request,
-        HttpServletResponse response)
+    public ResumeResult login(String account, String password, String redirectUrl, HttpServletRequest request, HttpServletResponse response)
     {
-        if (StringUtils.isBlank(username) || StringUtils.isBlank(password))
+        if (StringUtils.isBlank(account))
         {
-            return ResumeResult.build(false, "用户名和密码不能为空");
+            return ResumeResult.build(false, "账号不能为空");
+        }
+        if(StringUtils.isBlank(password)){
+        	 return ResumeResult.build(false, "密码不能为空");
         }
         try
         {
-            ResumeResult result = SSOUserService.userLogin(username, password, type);
+        	Short type = AccountTypeEnum.EMAIL.getValue();
+        	if(ValidateUtils.isMobile(account)){
+        		type = AccountTypeEnum.PHONE.getValue();
+        	}
+            ResumeResult result = SSOUserService.userLogin(account, password, type);
+            if(!result.getStatus()){
+            	return result;
+            }
             // 设置cookie
-            CookieUtils.setCookie(request, response, "RESUME_USER_TOKEN", (String)result.getData());
+            CookieUtils.setCookie(request, response, Commons.RESUME_USER_COOKIE_TOKEN, (String)result.getData());
+            String resultData = (String) result.getData();
+            if(StringUtils.isBlank(redirectUrl)){
+
+            }
             return result;
         }
         catch (Exception e)
         {
             e.printStackTrace();
-            return ResumeResult.build(false, ExceptionUtil.getStackTrace(e));
+            return ResumeResult.build(false, "登录失败");
         }
     }
     
